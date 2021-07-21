@@ -10,113 +10,134 @@ const teacherController = require('../controllers/TeacherController');
 //protected routes
 
 ApiRouter.get(
-	'/getListOfHomeworks',
-	AuthController.isStudent,
-	HomeworkController.getListOfHomeworks
+  '/getListOfHomeworks',
+  AuthController.isStudent,
+  AuthController.checkForRedirect,
+  HomeworkController.getListOfHomeworks
 );
 ApiRouter.get(
-	'/getHomework/:homeworkPublicId',
-	AuthController.isStudent,
-	HomeworkController.getHomework
+  '/getHomework/:homeworkPublicId',
+  AuthController.isStudent,
+  AuthController.checkForRedirect,
+  HomeworkController.getHomework
 );
 
 ApiRouter.post(
-	'/createHomework',
-	AuthController.isTeacher,
-	HomeworkController.createHomework
+  '/createHomework',
+  AuthController.isTeacher,
+  AuthController.checkForRedirect,
+  HomeworkController.createHomework
 );
 
 ApiRouter.post(
-	'/removeHomework',
-	AuthController.isTeacher,
-	HomeworkController.removeHomework
+  '/removeHomework',
+  AuthController.isTeacher,
+  AuthController.checkForRedirect,
+  HomeworkController.removeHomework
 );
 
 ApiRouter.post(
-	'/addTask',
-	AuthController.isTeacher,
-	HomeworkController.addTask
+  '/addTask',
+  AuthController.isTeacher,
+  AuthController.checkForRedirect,
+  HomeworkController.addTask
 );
 ApiRouter.post(
-	'/removeTask',
-	AuthController.isTeacher,
-	HomeworkController.removeTask
+  '/removeTask',
+  AuthController.isTeacher,
+  AuthController.checkForRedirect,
+  HomeworkController.removeTask
 );
 ApiRouter.post(
-	'/sendHomework',
-	AuthController.isTeacher,
-	HomeworkController.sendHomework
+  '/sendHomework',
+  AuthController.isTeacher,
+  AuthController.checkForRedirect,
+  HomeworkController.sendHomework
 );
 ApiRouter.post(
-	'/homeworks/removeGroup',
-	AuthController.isTeacher,
-	HomeworkController.removeGroup
+  '/homeworks/removeGroup',
+  AuthController.isTeacher,
+  AuthController.checkForRedirect,
+  HomeworkController.removeGroup
 );
 ApiRouter.post(
-	'/addGroup',
-	AuthController.isTeacher,
-	HomeworkController.addGroup
+  '/addGroup',
+  AuthController.isTeacher,
+  AuthController.checkForRedirect,
+  HomeworkController.addGroup
 );
 ApiRouter.post(
-	'/removeStudent',
-	AuthController.isTeacher,
-	HomeworkController.removeStudent
+  '/removeStudent',
+  AuthController.isTeacher,
+  AuthController.checkForRedirect,
+  HomeworkController.removeStudent
 );
 ApiRouter.post(
-	'/sendAnswers',
-	AuthController.isStudent,
-	HomeworkController.sendAnswers
+  '/sendAnswers',
+  AuthController.isStudent,
+  AuthController.checkForRedirect,
+  HomeworkController.sendAnswers
 );
 ApiRouter.get(
-	'/getSolution/:homeworkPublicId.:solutionPublicId',
-	AuthController.isStudent,
-	HomeworkController.getSolution
+  '/getSolution/:homeworkPublicId.:solutionPublicId',
+  AuthController.isStudent,
+  AuthController.checkForRedirect,
+  HomeworkController.getSolution
 );
 ApiRouter.get(
-	'/getStudentList',
-	AuthController.isTeacher,
-	StudentController.getStudentsByName
+  '/getStudentList',
+  AuthController.isTeacher,
+  AuthController.checkForRedirect,
+  StudentController.getStudentsByName
 );
 ApiRouter.get(
-	'/getUserInfo/:publicId',
-	AuthController.isTeacher,
-	UserController.getInfo
+  '/getUserInfo/:publicId',
+  AuthController.isTeacher,
+  AuthController.checkForRedirect,
+  UserController.getInfo
 );
 ApiRouter.get(
-	'/getReceivedStudents',
-	AuthController.isTeacher,
-	HomeworkController.getReceivedStudents
+  '/getReceivedStudents',
+  AuthController.isTeacher,
+  AuthController.checkForRedirect,
+  HomeworkController.getReceivedStudents
 );
 ApiRouter.get('/upload_files/:fileReference', FilesController.getFile);
 ApiRouter.get('/get_avatar/:filePath', FilesController.getAvatar);
 ApiRouter.post(
-	'/checkSolution',
-	AuthController.isTeacher,
-	HomeworkController.checkSolution
+  '/checkSolution',
+  AuthController.isTeacher,
+  AuthController.checkForRedirect,
+  HomeworkController.checkSolution
 );
 ApiRouter.post(
-	'/uploadProfilePic',
-	AuthController.isTeacher,
-	UserController.setUserPicture
+  '/uploadProfilePic',
+  AuthController.isTeacher,
+  AuthController.checkForRedirect,
+  UserController.setUserPicture
 );
 ApiRouter.get(
-	'/getProfile',
-	AuthController.isStudent,
-	UserController.getProfile
+  '/getProfile',
+  AuthController.isStudent,
+  AuthController.checkForRedirect,
+  UserController.getProfile
 );
 ApiRouter.post(
-	'/sendHomeworkToTeacher',
-	AuthController.isTeacher,
-	HomeworkController.sendHomeworkToTeacher
+  '/sendHomeworkToTeacher',
+  AuthController.isTeacher,
+  AuthController.checkForRedirect,
+  HomeworkController.sendHomeworkToTeacher
 );
 ApiRouter.get(
-	'/getTeachersWithAccess',
-	AuthController.isTeacher,
-	HomeworkController.getTeachersWithAccess
+  '/getTeachersWithAccess',
+  AuthController.isTeacher,
+  AuthController.checkForRedirect,
+  HomeworkController.getTeachersWithAccess
 );
 ApiRouter.get(
-	'/getTeacherList',
-	AuthController.isTeacher,
-	teacherController.getTeachersByName
+  '/getTeacherList',
+  AuthController.isTeacher,
+  AuthController.checkForRedirect,
+  teacherController.getTeachersByName
 );
 module.exports = ApiRouter;

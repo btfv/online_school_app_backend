@@ -12,6 +12,18 @@ var AuthController = {};
 AuthController.student = {};
 AuthController.teacher = {};
 
+AuthController.checkForRedirect = async (req, res, next) => {
+	if(req.user.isTeacher && req.headers['referer'].includes(process.env.STUDENT_FRONTEND_ADDRESS)){
+		res.status(401).json({ error: "Wrong mode. Move to " + process.env.TEACHER_FRONTEND_ADDRESS });
+		return
+	}
+	if(!req.user.isTeacher && req.headers['referer'].includes(process.env.TEACHER_FRONTEND_ADDRESS)){
+		res.status(401).json({ error: "Wrong mode. Move to " + process.env.STUDENT_FRONTEND_ADDRESS });
+		return
+	}
+	next()
+} 
+
 const checkCookie = (cookie) => {
 	return typeof cookie !== 'undefined';
 };
@@ -92,8 +104,8 @@ AuthController.student.login = async (req, res, next) => {
 
 				res.cookie('Authorization', 'Bearer ' + token, {
 					httpOnly: true,
-					secure: process.env.NODE_ENV === 'production',
-					sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
+					secure: true,
+					sameSite: 'none',
 				})
 					.status(200)
 					.json({
@@ -180,7 +192,7 @@ AuthController.teacher.login = async (req, res, next) => {
 				});
 				res.cookie('Authorization', 'Bearer ' + token, {
 					httpOnly: true,
-					secure: process.env.NODE_ENV === 'production' ? false : true,
+					secure: true,
 					sameSite: 'none',
 				})
 					.status(200)

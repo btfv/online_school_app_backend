@@ -511,7 +511,7 @@ HomeworkService.removeHomework = async function (homeworkPublicId) {
 	await HomeworkModel.findOne({
 		publicId: homeworkPublicId,
 	})
-		.select('receivedStudents receivedGroups creatorId attachments')
+		.select('receivedStudents receivedGroups creatorId attachments teachersWithAccess')
 		.then(async (homeworkDocument) => {
 			const attachments = homeworkDocument.attachments;
 			const creatorId = homeworkDocument.creatorId;
@@ -526,6 +526,13 @@ HomeworkService.removeHomework = async function (homeworkPublicId) {
 					homeworkPublicId
 				);
 			});
+			const teacherIds = homeworkDocument.teachersWithAccess;
+			teacherIds.map(async (id) => {
+				await HomeworkService.removeTeacher(
+					id,
+					homeworkId
+				);
+			});
 			/*
 				const groups = homeworkDocument.receivedGroups;
 				groups.map(async (group) => {
@@ -535,17 +542,21 @@ HomeworkService.removeHomework = async function (homeworkPublicId) {
 					);
 				});
 			*/
-			await TeacherModel.findOneAndUpdate(
-				{ _id: creatorId },
-				{
-					$pull: { homeworks: homeworkId },
-				}
-			);
+			HomeworkService.removeTeacher(creatorId, homeworkId)
 			await HomeworkModel.findByIdAndRemove(homeworkId);
 		});
 
 	return true;
 };
+
+HomeworkService.removeTeacher = async (teacherId, homeworkId) =>{
+	await TeacherModel.findOneAndUpdate(
+		{ _id: teacherId },
+		{
+			$pull: { homeworks: homeworkId },
+		}
+	);
+}
 
 HomeworkService.checkSolution = async function (
 	homeworkPublicId,
