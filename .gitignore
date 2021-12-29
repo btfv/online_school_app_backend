@@ -104,7 +104,10 @@ dist
 .tern-port
 
 onlineschool.code-workspace
-.VSCodeCounter 
+.VSCodeCounter
 
 Procfile
 .vscode/settings.json
+
+# VS code
+.vscode
