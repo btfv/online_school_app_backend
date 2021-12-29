@@ -106,7 +106,6 @@ dist
 onlineschool.code-workspace
 .VSCodeCounter
 
-Procfile
 .vscode/settings.json
 
 # VS code
