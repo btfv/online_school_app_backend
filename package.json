@@ -30,10 +30,10 @@
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
-    "shortid": "^2.2.15"
+    "shortid": "^2.2.15",
+    "cross-env": "^7.0.3"
   },
   "devDependencies": {
-    "@types/dotenv": "^8.2.0",
-    "cross-env": "^7.0.3"
+    "@types/dotenv": "^8.2.0"
   }
 }
