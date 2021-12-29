@@ -564,6 +564,11 @@ HomeworkService.checkSolution = async function (
 	values,
 	checkedByPublicId
 ) {
+	Object.entries(values).map(([taskPublicId, value]) => {
+		if(value < 0){
+			throw Error("points should be > 0")
+		}
+	})
 	const teacherInfo = await TeacherService.getTeacherInfo({
 		teacherPublicId: checkedByPublicId,
 		includeId: true,
@@ -617,7 +622,6 @@ HomeworkService.checkSolution = async function (
 					},
 				}
 			);
-
 			await Promise.all(
 				Object.entries(values).map(async ([taskPublicId, value]) => {
 					await HomeworkModel.updateOne(
