@@ -6,12 +6,12 @@ const AgeSchema = require('../schemas/age.schema');
 const EmailSchema = require('../schemas/email.schema');
 
 const AuthSignupSchema = Joi.object({
-  password: PasswordSchema,
-  firstname: NameSchema,
-  lastname: NameSchema,
-  username: UsernameSchema,
-  age: AgeSchema,
-  email: EmailSchema,
+  password: PasswordSchema.required(),
+  firstname: NameSchema.required(),
+  lastname: NameSchema.required(),
+  username: UsernameSchema.required(),
+  age: AgeSchema.required(),
+  email: EmailSchema.required(),
 });
 
 module.exports = AuthSignupSchema;
