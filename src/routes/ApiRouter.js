@@ -6,138 +6,140 @@ const StudentController = require('../controllers/StudentController');
 const FilesController = require('../controllers/FilesController');
 const UserController = require('../controllers/UserController');
 const teacherController = require('../controllers/TeacherController');
-
+const IsTeacher = require('../middlewares/auth.isTeacher.middleware');
+const IsStudentOrTeacher = require('../middlewares/auth.isStudentOrTeacher.middleware');
+const WrongModeRedirect = require('../middlewares/auth.wrongModeRedirect.middleware');
 //protected routes
 
 ApiRouter.get(
   '/getListOfHomeworks',
-  AuthController.isStudent,
-  AuthController.checkForRedirect,
+  IsStudentOrTeacher,
+  WrongModeRedirect,
   HomeworkController.getListOfHomeworks
 );
 ApiRouter.get(
   '/getHomework/:homeworkPublicId',
-  AuthController.isStudent,
-  AuthController.checkForRedirect,
+  IsStudentOrTeacher,
+  WrongModeRedirect,
   HomeworkController.getHomework
 );
 
 ApiRouter.post(
   '/createHomework',
-  AuthController.isTeacher,
-  AuthController.checkForRedirect,
+  IsTeacher,
+  WrongModeRedirect,
   HomeworkController.createHomework
 );
 
 ApiRouter.post(
   '/removeHomework',
-  AuthController.isTeacher,
-  AuthController.checkForRedirect,
+  IsTeacher,
+  WrongModeRedirect,
   HomeworkController.removeHomework
 );
 
 ApiRouter.post(
   '/addTask',
-  AuthController.isTeacher,
-  AuthController.checkForRedirect,
+  IsTeacher,
+  WrongModeRedirect,
   HomeworkController.addTask
 );
 ApiRouter.post(
   '/removeTask',
-  AuthController.isTeacher,
-  AuthController.checkForRedirect,
+  IsTeacher,
+  WrongModeRedirect,
   HomeworkController.removeTask
 );
 ApiRouter.post(
   '/sendHomework',
-  AuthController.isTeacher,
-  AuthController.checkForRedirect,
+  IsTeacher,
+  WrongModeRedirect,
   HomeworkController.sendHomework
 );
 ApiRouter.post(
   '/homeworks/removeGroup',
-  AuthController.isTeacher,
-  AuthController.checkForRedirect,
+  IsTeacher,
+  WrongModeRedirect,
   HomeworkController.removeGroup
 );
 ApiRouter.post(
   '/addGroup',
-  AuthController.isTeacher,
-  AuthController.checkForRedirect,
+  IsTeacher,
+  WrongModeRedirect,
   HomeworkController.addGroup
 );
 ApiRouter.post(
   '/removeStudent',
-  AuthController.isTeacher,
-  AuthController.checkForRedirect,
+  IsTeacher,
+  WrongModeRedirect,
   HomeworkController.removeStudent
 );
 ApiRouter.post(
   '/sendAnswers',
-  AuthController.isStudent,
-  AuthController.checkForRedirect,
+  IsStudentOrTeacher,
+  WrongModeRedirect,
   HomeworkController.sendAnswers
 );
 ApiRouter.get(
   '/getSolution/:homeworkPublicId.:solutionPublicId',
-  AuthController.isStudent,
-  AuthController.checkForRedirect,
+  IsStudentOrTeacher,
+  WrongModeRedirect,
   HomeworkController.getSolution
 );
 ApiRouter.get(
   '/getStudentList',
-  AuthController.isTeacher,
-  AuthController.checkForRedirect,
+  IsTeacher,
+  WrongModeRedirect,
   StudentController.getStudentsByName
 );
 ApiRouter.get(
   '/getUserInfo/:publicId',
-  AuthController.isTeacher,
-  AuthController.checkForRedirect,
+  IsTeacher,
+  WrongModeRedirect,
   UserController.getInfo
 );
 ApiRouter.get(
   '/getReceivedStudents',
-  AuthController.isTeacher,
-  AuthController.checkForRedirect,
+  IsTeacher,
+  WrongModeRedirect,
   HomeworkController.getReceivedStudents
 );
 ApiRouter.get('/upload_files/:fileReference', FilesController.getFile);
 ApiRouter.get('/get_avatar/:filePath', FilesController.getAvatar);
 ApiRouter.post(
   '/checkSolution',
-  AuthController.isTeacher,
-  AuthController.checkForRedirect,
+  IsTeacher,
+  WrongModeRedirect,
   HomeworkController.checkSolution
 );
 ApiRouter.post(
   '/uploadProfilePic',
-  AuthController.isTeacher,
-  AuthController.checkForRedirect,
+  IsTeacher,
+  WrongModeRedirect,
   UserController.setUserPicture
 );
 ApiRouter.get(
   '/getProfile',
-  AuthController.isStudent,
-  AuthController.checkForRedirect,
+  IsStudentOrTeacher,
+  WrongModeRedirect,
   UserController.getProfile
 );
 ApiRouter.post(
   '/sendHomeworkToTeacher',
-  AuthController.isTeacher,
-  AuthController.checkForRedirect,
+  IsTeacher,
+  WrongModeRedirect,
   HomeworkController.sendHomeworkToTeacher
 );
 ApiRouter.get(
   '/getTeachersWithAccess',
-  AuthController.isTeacher,
-  AuthController.checkForRedirect,
+  IsTeacher,
+  WrongModeRedirect,
   HomeworkController.getTeachersWithAccess
 );
 ApiRouter.get(
   '/getTeacherList',
-  AuthController.isTeacher,
-  AuthController.checkForRedirect,
+  IsTeacher,
+  WrongModeRedirect,
   teacherController.getTeachersByName
 );
 module.exports = ApiRouter;
