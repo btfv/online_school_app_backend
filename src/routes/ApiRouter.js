@@ -1,14 +1,13 @@
 const express = require('express');
 const ApiRouter = express.Router();
-const AuthController = require('../controllers/AuthController');
 const HomeworkController = require('../controllers/HomeworkController');
 const StudentController = require('../controllers/StudentController');
 const FilesController = require('../controllers/FilesController');
 const UserController = require('../controllers/UserController');
 const teacherController = require('../controllers/TeacherController');
-const IsTeacher = require('../middlewares/auth.isTeacher.middleware');
-const IsStudentOrTeacher = require('../middlewares/auth.isStudentOrTeacher.middleware');
-const WrongModeRedirect = require('../middlewares/auth.wrongModeRedirect.middleware');
+const IsTeacher = require('../middlewares/auth/auth.isTeacher.middleware');
+const IsStudentOrTeacher = require('../middlewares/auth/auth.isStudentOrTeacher.middleware');
+const WrongModeRedirect = require('../middlewares/auth/auth.wrongModeRedirect.middleware');
 //protected routes
 
 ApiRouter.get(

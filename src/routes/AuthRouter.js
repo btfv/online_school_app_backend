@@ -3,9 +3,9 @@ const AuthRouter = express.Router();
 const AuthController = require('../controllers/AuthController');
 const UserController = require('../controllers/UserController');
 const JoiValidator = require('../middlewares/joi_validator.middleware');
-const AuthLoginSchema = require('../joi_schemas/objects/auth.login.schema');
-const AuthSignupSchema = require('../joi_schemas/objects/auth.signup.schema');
-const ChangePasswordSchema = require('../joi_schemas/objects/auth.changePassword.schema');
+const AuthLoginSchema = require('../joi_schemas/objects/auth/auth.login.schema');
+const AuthSignupSchema = require('../joi_schemas/objects/auth/auth.signup.schema');
+const ChangePasswordSchema = require('../joi_schemas/objects/auth/auth.changePassword.schema');
 
 //open routes
 AuthRouter.post(

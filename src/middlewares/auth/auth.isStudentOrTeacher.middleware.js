@@ -1,5 +1,5 @@
 const passport = require('passport');
-const CheckCookie = require('../utils/checkCookie.util');
+const CheckCookie = require('../../utils/checkCookie.util');
 
 module.exports = async function IsStudentOrTeacher(req, res, next) {
   const cookie = req.cookies.Authorization;

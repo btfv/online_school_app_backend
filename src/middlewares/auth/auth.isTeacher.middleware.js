@@ -1,9 +1,9 @@
 const passport = require('passport');
-const CheckCookie = require('../utils/checkCookie.util');
+const CheckCookie = require('../../utils/checkCookie.util');
 
 module.exports = async function IsTeacher(req, res, next) {
   const cookie = req.cookies.Authorization;
-  if (!checkCookie(cookie)) {
+  if (!CheckCookie(cookie)) {
     return res.status(401).send();
   }
   await passport.authenticate('jwt', { session: false }, (error, user) => {
