@@ -7,6 +7,10 @@ const USERNAME_MAX_LENGTH = 32;
 const NAME_MIN_LENGTH = 1;
 const NAME_MAX_LENGTH = 64;
 
+const MAX_OPTIONS = 8;
+
+const MAX_TEXT_SIZE = 2048;
+
 module.exports = {
   PASSWORD_MIN_LENGTH,
   PASSWORD_MAX_LENGTH,
@@ -14,4 +18,6 @@ module.exports = {
   USERNAME_MAX_LENGTH,
   NAME_MIN_LENGTH,
   NAME_MAX_LENGTH,
+  MAX_OPTIONS,
+  MAX_TEXT_SIZE,
 };
