@@ -12,6 +12,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 var ApiRouter = require('./routes/ApiRouter');
 const AuthRouter = require('./routes/AuthRouter');
+const HandleErrorMiddleware = require('./middlewares/handleError.middleware');
 
 const secret = process.env.SECRET_KEY;
 
@@ -62,18 +63,10 @@ app.use(logger(process.env.NODE_ENV === 'development' ? 'dev' : 'tiny'));
 require('./config/passport');
 app.use('/api', ApiRouter);
 app.use('/auth', AuthRouter);
+app.use(HandleErrorMiddleware);
+
 app.use(function (req, res, next) {
   next(createError(404));
-});
-
-// error handler
-app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = process.env.NODE_ENV === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500).send(err.message);
 });
 
 module.exports = app;

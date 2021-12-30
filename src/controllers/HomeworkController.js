@@ -18,7 +18,7 @@ HomeworkController.getListOfHomeworks = async (req, res, next) => {
 		}
 		return res.status(200).json(previews);
 	} catch (error) {
-		return res.status(400).json({ error: error.message });
+		return next(error);
 	}
 };
 
@@ -38,7 +38,7 @@ HomeworkController.getHomework = async (req, res, next) => {
 			return res.status(200).json(homework);
 		}
 	} catch (error) {
-		return res.status(400).json({ error: error.message });
+		return next(error);
 	}
 };
 
@@ -75,7 +75,7 @@ HomeworkController.addTask = async function (req, res, next) {
 
 		return res.status(200).send();
 	} catch (error) {
-		return res.status(400).json({ error: error.message });
+		return next(error);
 	}
 };
 
@@ -90,7 +90,7 @@ HomeworkController.removeTask = async function (req, res, next) {
 		await HomeworkService.removeTask(homeworkPublicId, taskPublicId);
 		return res.status(200).send();
 	} catch (error) {
-		return res.status(400).json({ error: error.message });
+		return next(error);
 	}
 };
 HomeworkController.createHomework = async function (req, res, next) {
@@ -114,7 +114,7 @@ HomeworkController.createHomework = async function (req, res, next) {
 		);
 		return res.status(200).json({ homeworkPublicId });
 	} catch (error) {
-		return res.status(400).json({ error: error.message });
+		return next(error);
 	}
 };
 
@@ -128,7 +128,7 @@ HomeworkController.removeHomework = async function (req, res, next) {
 		await HomeworkService.removeHomework(homeworkPublicId);
 		return res.status(200).send();
 	} catch (error) {
-		return res.status(400).json({ error: error.message });
+		return next(error);
 	}
 };
 
@@ -147,7 +147,7 @@ HomeworkController.sendHomework = async function (req, res, next) {
 		);
 		return res.status(200).send();
 	} catch (error) {
-		return res.status(400).json({ error: error.message });
+		return next(error);
 	}
 };
 
@@ -161,7 +161,7 @@ HomeworkController.removeStudent = async function (req, res, next) {
 		await HomeworkService.removeStudent(studentPublicId, homeworkPublicId);
 		return res.status(200).send();
 	} catch (error) {
-		return res.status(400).json({ error: error.message });
+		return next(error);
 	}
 };
 
@@ -176,7 +176,7 @@ HomeworkController.addGroup = async function (req, res, next) {
 		HomeworkService.addGroup(groupPublicId, homeworkPublicId);
 		return res.status(200).send();
 	} catch (error) {
-		return res.status(400).json({ error: error.message });
+		return next(error);
 	}
 };
 
@@ -190,7 +190,7 @@ HomeworkController.removeGroup = async function (req, res, next) {
 		HomeworkService.removeGroup(groupPublicId, homeworkPublicId);
 		return res.status(200).send();
 	} catch (error) {
-		return res.status(400).json({ error: error.message });
+		return next(error);
 	}
 };
 
@@ -209,7 +209,7 @@ HomeworkController.sendAnswers = async function (req, res, next) {
 		);
 		return res.status(200).send();
 	} catch (error) {
-		return res.status(400).json({ error: error.message });
+		return next(error);
 	}
 };
 
@@ -234,7 +234,7 @@ HomeworkController.getSolution = async function (req, res, next) {
 		}
 		return res.status(200).json(solutionDocument);
 	} catch (error) {
-		return res.status(400).json({ error: error.message });
+		return next(error);
 	}
 };
 
@@ -250,7 +250,7 @@ HomeworkController.checkSolution = async function (req, res, next) {
 		);
 		return res.status(200).send();
 	} catch (error) {
-		return res.status(400).json({ error: error.message });
+		return next(error);
 	}
 };
 
@@ -263,7 +263,7 @@ HomeworkController.getReceivedStudents = async function (req, res, next) {
 		);
 		return res.status(200).json(receivedStudents);
 	} catch (error) {
-		return res.status(400).json({ error: error.message });
+		return next(error);
 	}
 };
 
@@ -277,7 +277,7 @@ HomeworkController.sendHomeworkToTeacher = async (req, res, next) => {
 		);
 		return res.status(200).send();
 	} catch (error) {
-		return res.status(400).json({ error: error.message });
+		return next(error);
 	}
 };
 
@@ -290,7 +290,7 @@ HomeworkController.getTeachersWithAccess = async (req, res, next) => {
 		);
 		return res.status(200).json(teachers);
 	} catch (error) {
-		return res.status(400).json({ error: error.message });
+		return next(error);
 	}
 };
 

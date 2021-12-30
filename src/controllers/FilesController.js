@@ -11,7 +11,7 @@ FilesController.getAvatar = async (req, res, next) => {
 		);
 		return res.sendFile(filePath);
 	} catch (error) {
-		return res.status(400).json({ error: error.message });
+		return next(error);
 	}
 };
 
@@ -29,7 +29,7 @@ FilesController.getFile = async function (req, res, next) {
 		);
 		return res.status(200).download(filePath, fileName);
 	} catch (error) {
-		return res.status(400).json({ error: error.message });
+		return next(error);
 	}
 };
 

@@ -18,7 +18,7 @@ AuthController.student.login = async (req, res, next) => {
     { session: false },
     (error, studentDocument) => {
       if (error || !studentDocument) {
-        return res.status(400).json({ error: error.message });
+        return next(error);
       }
       const payload = {
         publicId: studentDocument.publicId,
@@ -26,7 +26,7 @@ AuthController.student.login = async (req, res, next) => {
       };
       req.login(payload, { session: false }, (error) => {
         if (error) {
-          res.status(400).json({ error: error.message });
+          return next(error);
         }
 
         const token = jwt.sign(payload, secret, {
@@ -82,7 +82,7 @@ AuthController.student.register = async (req, res, next) => {
 
     res.status(200).send();
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    next(error);
   }
 };
 
@@ -92,7 +92,7 @@ AuthController.teacher.login = async (req, res, next) => {
     { session: false },
     (error, teacherDocument) => {
       if (error || !teacherDocument) {
-        return res.status(400).json({ error: error.message });
+        return next(error);
       }
       const payload = {
         publicId: teacherDocument.publicId,
@@ -102,7 +102,7 @@ AuthController.teacher.login = async (req, res, next) => {
 
       req.login(payload, { session: false }, (error) => {
         if (error) {
-          return res.status(400).json({ error: error.message });
+          return next(error);
         }
 
         const token = jwt.sign(payload, secret, {
@@ -157,14 +157,14 @@ AuthController.teacher.register = async (req, res, next) => {
 
     res.status(200).send();
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    next(error);
   }
 };
 AuthController.logout = async (req, res, next) => {
   try {
     res.clearCookie('Authorization').status(200).send();
   } catch (error) {
-    res.status(400);
+    next(error);
   }
 };
 
