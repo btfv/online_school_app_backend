@@ -2,5 +2,5 @@ module.exports = function HandleError(err, req, res, next) {
   if (res.headersSent) {
     return next(err);
   }
-  return res.status(400).json({ error: error.message });
+  return res.status(400).json({ error: err.message });
 };
